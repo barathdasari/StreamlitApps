@@ -1,0 +1,37 @@
+The unified PilotForge app is a comprehensive, AI-powered Streamlit application that provides an end-to-end solution for designing, executing, and analyzing pilot studies. It combines experiment planning, group creation, statistical testing, and agentic AI for automation and intelligence. Below, I’ll explain its product features sequentially, following the app’s natural workflow from start to finish. The app uses a multipage structure for smooth navigation, with a sidebar for phase selection and an “Agentic Mode” toggle to enable autonomous AI assistance.
+1. App Entry and Home Page
+	•	User Onboarding: Upon launch, users see a welcoming dashboard with an overview of the end-to-end workflow, quick-start guides, and a data upload widget. Features include sample dataset loading for demos and customizable themes (light/dark mode).
+	•	Navigation Sidebar: A persistent menu lets users jump between phases (e.g., “Baseline Analysis,” “Power Analysis”). It also includes the Agentic AI toggle, which activates proactive suggestions and automations across the app.
+	•	Session Management: The app uses Streamlit’s session state to track progress, storing data like uploaded files or generated groups for seamless transitions—no re-uploading required.
+2. Phase 1: Data Upload and Baseline Analysis
+	•	Data Ingestion: Users upload CSV/Excel datasets via a file uploader, with support for large files (up to 200MB). The app auto-detects columns and handles formats like dates or categoricals.
+	•	Automated Exploratory Analysis: Instantly computes and displays descriptive statistics (mean, median, standard deviation, quartiles) for all columns. Interactive visualizations (e.g., histograms, box plots, correlation heatmaps) are generated using Plotly or Altair for easy exploration.
+	•	KPI Selection and Deep Dive: Users select a primary KPI (binary like conversion rate or continuous like call-in rate). The app calculates baseline metrics (e.g., mean rate, variance) and identifies influencers (e.g., “Age correlates with KPI”).
+	•	Agentic AI Features: In Agentic Mode, an AI agent scans for anomalies (e.g., missing values, outliers) and auto-cleans or suggests fixes. It generates insights like “High variance in call-in rates—recommend stratifying by region.”
+3. Phase 2: Power Analysis and Experiment Design
+	•	Input Parameters: Users enter key values like Minimum Detectable Effect (MDE), alpha (e.g., 0.05), beta/power (e.g., 80%), and average daily traffic. The app pulls baseline KPI metrics from Phase 1 for calculations.
+	•	Sample Size and Duration Estimation: Automatically computes required users per group using statistical formulas (e.g., from statsmodels). It then estimates experiment duration (e.g., “Need 10 days at 500 users/day”).
+	•	Scenario Simulation: Users can tweak inputs for “what-if” analyses, with results shown in tables or charts.
+	•	Agentic AI Features: An AI agent runs adaptive simulations, optimizing parameters (e.g., “Lower MDE to 1% requires 20% more samples—approve?”) and forecasting based on trends.
+4. Phase 3: Representative Study Cohort Creation
+	•	Population Definition: Users input target proportions (e.g., 60% mobile users, 40% desktop) via sliders or forms, with validation against uploaded data.
+	•	Proportional Stratified Sampling: The app draws a cohort sized to match Phase 2’s requirements, ensuring it mirrors the defined population. Visual comparisons (e.g., pie charts) show before/after distributions.
+	•	Cohort Preview: Displays a summary table and export option for the sampled data.
+	•	Agentic AI Features: An AI agent validates proportions, suggests adjustments (e.g., “Data skews toward mobile—rebalance?”), and iterates sampling for optimal representativeness.
+5. Phase 4: Group Generation and Verification
+	•	KPI Binning and Stratification: Automatically bins the KPI (e.g., quartiles for continuous variables) and combines with other variables (e.g., demographics) for multi-variable stratification.
+	•	Randomization: Splits the cohort into treatment and control groups using stratified methods (e.g., via scikit-learn), with options for ratios (e.g., 50/50) and random seeds.
+	•	Balance Check Report: Generates a table with group comparisons (means, proportions, p-values from t-tests/chi-squared), confirming no significant differences.
+	•	Agentic AI Features: An optimizer agent iterates randomization for perfect balance, interpreting results (e.g., “P-value low—re-running with added strata”) and auto-fixing issues.
+6. Phase 5: Statistical Testing and Results Interpretation
+	•	Group Loading: Automatically pulls treatment/control groups from Phase 4 via session state.
+	•	Hypothesis Testing: Runs appropriate tests (e.g., t-test for continuous KPIs, chi-squared for binary) to compare groups, calculating p-values, effect sizes, and confidence intervals.
+	•	Visualizations and Reports: Displays comparison plots (e.g., density curves), power curves, and a downloadable PDF report with interpretations (e.g., “Significant lift detected”).
+	•	Agentic AI Features: A testing agent selects tests, runs sensitivity analyses, and provides natural-language summaries (e.g., “Results inconclusive—suggest increasing sample size”).
+Overarching Product Features
+	•	Agentic AI Integration: Powered by LangChain and LLMs (e.g., Groq), agents provide proactive help via chat interfaces, memory for context, and automation across phases. Toggle it on/off for flexibility.
+	•	User Experience Enhancements: Responsive design for mobile/desktop, progress trackers, undo/redo buttons, and error handling (e.g., “Invalid data—retry upload”).
+	•	Exports and Sharing: Downloadable CSVs/PDFs at any phase, with options for API integrations (e.g., export to Google Sheets).
+	•	Security and Scalability: Data privacy via local processing, caching for speed, and support for cloud deployment (e.g., Streamlit Community Cloud).
+	•	Customization: Users can add custom KPIs, tests, or agents via modular code.
+From data upload to actionable insights, PilotForge delivers a seamless, intelligent experience—saving time, reducing errors, and empowering users to run high-quality pilots effortlessly. 
